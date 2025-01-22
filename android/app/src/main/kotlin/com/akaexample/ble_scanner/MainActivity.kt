@@ -34,14 +34,15 @@ class MainActivity: FlutterActivity(){
                 "ble_scanner"
             ).setMethodCallHandler { call, result ->
                 if (call.method == "scanDevices") {
+                    
                     var bluetoothAdapter: BluetoothAdapter? = null
                     var scanCallback: ScanCallback? = null
                     val scannedDevices: MutableList<Map<String, String>> = mutableListOf()
                     val permissionRequestCode = 100
 
-                    // if (bluetoothAdapter?.isEnabled == false) {
-                    //     result.error("BLUETOOTH_DISABLED", "Bluetooth is disabled.", null)
-                    // }
+                    if (bluetoothAdapter?.isEnabled == false) {
+                        result.error("BLUETOOTH_DISABLED", "Bluetooth is disabled.", null)
+                    }
                     // if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     //     result.error("LOCATION_PERMISSION_DENIED", "Location permission is required.", null)
                     // }
@@ -51,6 +52,7 @@ class MainActivity: FlutterActivity(){
                     val bluetoothLeScanner = bluetoothAdapter?.bluetoothLeScanner
                     scanCallback = object : ScanCallback() {
                         override fun onScanResult(callbackType: Int, scanResult: ScanResult) {
+                            
                             val device = scanResult.device
                             val deviceMap = mapOf(
                                 "name" to (device.name ?: "Unknown"),

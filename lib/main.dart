@@ -31,15 +31,15 @@ class _MyHomePageState extends State<MyHomePage> {
   final BleScanner _bleScanner = BleScanner();
   List<BleDevice> _devices = [];
 
-  Future<void> _scan() async {    
+  Future<void> _scan() async {
     try {
       final devices = await _bleScanner.scanDevices();
-       setState(() {
-         _devices = devices;
+      setState(() {
+        _devices = devices;
       });
     } catch (e) {
       print("Error during scan: $e");
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: const Text('Scan for Devices'),
             ),
             Expanded(
-               child: ListView.builder(
+              child: ListView.builder(
                 itemCount: _devices.length,
                 itemBuilder: (context, index) {
                   final device = _devices[index];
