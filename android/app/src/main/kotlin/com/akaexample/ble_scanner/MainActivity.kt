@@ -20,11 +20,11 @@ import io.flutter.plugin.common.MethodChannel.Result
 import java.util.concurrent.ConcurrentHashMap
 
 class MainActivity: FlutterActivity(), MethodCallHandler {
-     private lateinit var channel: MethodChannel
+    private lateinit var channel: MethodChannel
     private lateinit var context: Context
     private var bluetoothAdapter: BluetoothAdapter? = null
     private var scanCallback: ScanCallback? = null
-     private val scannedDevices: MutableMap<String, Map<String, String>> = ConcurrentHashMap()
+    private val scannedDevices: MutableMap<String, Map<String, String>> = ConcurrentHashMap()
     private var resultScan: Result? = null
     private val permissionRequestCode = 100
 
@@ -117,7 +117,7 @@ class MainActivity: FlutterActivity(), MethodCallHandler {
              }
               android.os.Handler().postDelayed({
                stopScan(bluetoothLeScanner)
-            }, 10000)
+            }, 5000)
         } catch (e: Exception) {
             Log.e("BleScannerPlugin", "Error in startScan : $e")
             resultScan?.error("SCAN_START_FAILED", "Failed to start scan: $e", null)

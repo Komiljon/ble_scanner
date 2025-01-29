@@ -36,11 +36,11 @@ class _MyHomePageState extends State<MyHomePage> {
       final devices = await _bleScanner.scanDevices();
       setState(() {
         _devices = devices;
-        //print(devices);
       });
     } catch (e) {
-      print("Error during scan: $e");
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+      }
     }
   }
 
